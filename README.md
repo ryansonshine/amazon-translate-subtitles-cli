@@ -1,5 +1,7 @@
 # amazon-translate-subtitles-cli
 
+<!-- https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes -->
+
 [![npm package][npm-img]][npm-url]
 [![Build Status][build-img]][build-url]
 [![Downloads][downloads-img]][downloads-url]
@@ -8,29 +10,41 @@
 [![Commitizen Friendly][commitizen-img]][commitizen-url]
 [![Semantic Release][semantic-release-img]][semantic-release-url]
 
-> My awesome command-line tool
+> CLI for translating subtitles embedded in video files using Amazon Translate
 
 ## Install
 
 ```bash
-npm install amazon-translate-subtitles-cli
+npm install -g amazon-translate-subtitles-cli
 ```
 
 ## Usage
 
 ```bash
-Usage: my-command [options]
+Usage: translate-subs [options]
 
 Options:
-  -V, --version            output the version number
-  -d, --debug              enables verbose logging (default: false)
-  -v, --verbose            enables verbose logging (default: false)
+  -V, --version                     output the version number
+  -d, --debug                       enables verbose logging (default: false)
+  -i, --input <file>                source video file path
+  -t, --target-language <language>  target language to translate to (ISO 639-1)
+  -s, --source-language <language>  source language to translate from (ISO 639-1) (default: "en")
+  -o, --out <file>                  path and filename to save the srt file
+  -p, --profile <profile>           AWS profile to use for AWS SDK
+  -n, --no-progress                 disables progress bar
+  -h, --help                        display help for command
 
 Examples:
 
-  $ my-command --version
-  1.0.0
+  $ translate-subs --input my-movie.mkv --target-language th
+  Translating subtitles from video /home/ryansonshine/my-movie.mkv
+  Translating [================================================] 100% / 0.0s remaining
+  Successfully saved translated subtitles at /home/ryansonshine/my-movie.th.srt
 ```
+
+## Related
+
+- [amazon-translate-subtitles][api-url] - API for this CLI
 
 [build-img]:https://github.com/ryansonshine/amazon-translate-subtitles-cli/actions/workflows/release.yml/badge.svg
 [build-url]:https://github.com/ryansonshine/amazon-translate-subtitles-cli/actions/workflows/release.yml
@@ -46,3 +60,4 @@ Examples:
 [semantic-release-url]:https://github.com/semantic-release/semantic-release
 [commitizen-img]:https://img.shields.io/badge/commitizen-friendly-brightgreen.svg
 [commitizen-url]:http://commitizen.github.io/cz-cli/
+[api-url]:https://github.com/ryansonshine/amazon-translate-subtitles
