@@ -30,14 +30,15 @@ Options:
   -o, --out <file>                  path and filename to save the srt file
   -p, --profile <profile>           AWS profile to use for AWS SDK
   -n, --no-progress                 disables progress bar
+  -S, --silent                      disables all logging (default: false)
   -h, --help                        display help for command
 
 Examples:
 
   $ translate-subs --input my-movie.mkv --target-language th
-  Translating subtitles from video /home/ryansonshine/my-movie.mkv
+  [amazon-translate-subtitles-cli]: Translating subtitles from video /home/ryansonshine/my-movie.mkv
   Translating [================================================] 100% / 0.0s remaining
-  Successfully saved translated subtitles at /home/ryansonshine/my-movie.th.srt
+  [amazon-translate-subtitles-cli]: Successfully saved translated subtitles at /home/ryansonshine/my-movie.th.srt
 ```
 
 ## Related

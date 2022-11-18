@@ -1,35 +1,52 @@
 import { fromIni } from '@aws-sdk/credential-providers';
-import { translateSubtitles } from 'amazon-translate-subtitles';
+import {
+  translateSubtitles,
+  TranslateSubtitlesOptions,
+} from 'amazon-translate-subtitles';
 import { SupportedLanguage } from 'amazon-translate-subtitles/lib/types';
 import fs from 'fs';
 import path from 'path';
 import { cwd } from 'process';
 import { Options } from './cli';
+import { logger } from './logger';
 
 export const main = async (options: Options): Promise<void> => {
   const video = path.resolve(cwd(), options.input);
-  console.log(`Translating subtitles from video ${video}`);
+  logger.log(`Translating subtitles from video ${video}`);
 
-  const translatedSubtitles = await translateSubtitles({
+  const translateOptions: TranslateSubtitlesOptions = {
     targetLanguage: options.targetLanguage,
     video: fs.createReadStream(video),
-    ...(options.profile
-      ? {
-          awsClientOverrides: {
-            credentials: fromIni({ profile: options.profile }),
-          },
-        }
-      : {}),
+    ...(options.profile &&
+      options.profile !== 'default' && {
+        awsClientOverrides: {
+          credentials: fromIni({ profile: options.profile }),
+        },
+      }),
     showProgress: options.progress,
     sourceLanguage: options.sourceLanguage,
-  });
+  };
+
+  logger.debug(
+    `Translate options: ${JSON.stringify(
+      { ...translateOptions, video: 'removed' },
+      null,
+      2
+    )}`
+  );
+
+  const translatedSubtitles = await translateSubtitles(translateOptions);
+  logger.debug(
+    `Translated subtitles: ${translatedSubtitles.substring(0, 500)}`
+  );
 
   const outputPath = options.out
     ? path.resolve(cwd(), options.out)
     : getSrtPath(video, options.targetLanguage);
+  logger.debug(`Output Path: ${outputPath}`);
 
   await fs.promises.writeFile(outputPath, translatedSubtitles.toString());
-  console.log(`Successfully saved translated subtitles at ${outputPath}`);
+  logger.log(`Successfully saved translated subtitles at ${outputPath}`);
 };
 
 export const getSrtPath = (
