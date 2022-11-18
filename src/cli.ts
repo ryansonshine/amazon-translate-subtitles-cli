@@ -11,9 +11,9 @@ export interface Options {
   debug: boolean;
   input: string;
   targetLanguage: SupportedLanguage;
-  sourceLanguage: SupportedLanguage;
-  out: string;
-  profile: string;
+  sourceLanguage?: SupportedLanguage;
+  out?: string;
+  profile?: string;
   progress: boolean;
 }
 
