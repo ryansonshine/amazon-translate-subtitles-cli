@@ -37,7 +37,6 @@ program
   .parse(process.argv);
 
 const options = program.opts() as Options;
-console.log(__filename + 'options: ', options);
 
 void (async () => {
   await main(options);
