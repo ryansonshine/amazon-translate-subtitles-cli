@@ -27,6 +27,7 @@ Options:
   -i, --input <file>                source video file path
   -t, --target-language <language>  target language to translate to (ISO 639-1)
   -s, --source-language <language>  source language to translate from (ISO 639-1) (default: "en")
+  -S, --source-type <type>          type of source track to use for translation (choices: "auto", "sdh", "forced", default: "auto")
   -o, --out <file>                  path and filename to save the srt file
   -p, --profile <profile>           AWS profile to use for AWS SDK
   -n, --no-progress                 disables progress bar

@@ -1,5 +1,8 @@
-import type { SupportedLanguage } from 'amazon-translate-subtitles/lib/types';
-import { Command } from 'commander';
+import type {
+  SourceTrackType,
+  SupportedLanguage,
+} from 'amazon-translate-subtitles/lib/types';
+import { Command, Option } from 'commander';
 import { logger } from './logger';
 import { main } from './translate';
 export interface Options {
@@ -10,6 +13,7 @@ export interface Options {
   out?: string;
   profile?: string;
   progress: boolean;
+  sourceType: SourceTrackType;
   silent: boolean;
 }
 
@@ -30,6 +34,14 @@ program
     '-s, --source-language <language>',
     'source language to translate from (ISO 639-1)',
     'en'
+  )
+  .addOption(
+    new Option(
+      '-S, --source-type <type>',
+      'type of source track to use for translation'
+    )
+      .default('auto')
+      .choices(['auto', 'sdh', 'forced'])
   )
   .option('-o, --out <file>', 'path and filename to save the srt file')
   .option('-p, --profile <profile>', 'AWS profile to use for AWS SDK')

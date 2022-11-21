@@ -54,7 +54,7 @@
   "homepage": "https://github.com/ryansonshine/amazon-translate-subtitles-cli#readme",
   "dependencies": {
     "@aws-sdk/credential-providers": "^3.212.0",
-    "amazon-translate-subtitles": "^1.0.2",
+    "amazon-translate-subtitles": "^1.1.0",
     "aws-cli-util-logger": "^1.0.2",
     "commander": "^7.2.0"
   },

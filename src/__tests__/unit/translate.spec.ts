@@ -17,6 +17,7 @@ describe('translate', () => {
       progress: true,
       targetLanguage: 'auto',
       silent: false,
+      sourceType: 'auto',
     };
 
     let createReadStreamSpy = jest.spyOn(fs, 'createReadStream');

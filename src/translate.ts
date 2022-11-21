@@ -17,6 +17,7 @@ export const main = async (options: Options): Promise<void> => {
   const translateOptions: TranslateSubtitlesOptions = {
     targetLanguage: options.targetLanguage,
     video: fs.createReadStream(video),
+    sourceTrackType: options.sourceType,
     ...(options.profile &&
       options.profile !== 'default' && {
         awsClientOverrides: {
